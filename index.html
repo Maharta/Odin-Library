@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div data-id="modal_overlay" class="modal_overlay invisible">
+      <div data-id="modal" class="modal card">
+        <form action="post">
+          <h3>Add a new book</h3>
+          <!-- label will be invisible for accesibility -->
+          <div class="form-control">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              required
+            />
+          </div>
+          <div class="form-control">
+            <label for="author">Author</label>
+            <input
+              type="text"
+              id="author"
+              name="author"
+              placeholder="Author"
+              required
+            />
+          </div>
+          <div class="form-control">
+            <label for="pages">Pages</label>
+            <input
+              type="number"
+              id="pages"
+              name="pages"
+              placeholder="Pages"
+              required
+            />
+          </div>
+          <div class="checkbox-control">
+            <label for="read">Have you read it?</label>
+            <input type="checkbox" id="read" name="read" />
+          </div>
+          <button data-id="submit_book" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <header class="header">
+      <div class="container">
+        <h1>Library</h1>
+        <button>Log in</button>
+      </div>
+    </header>
+    <main>
+      <button data-id="add_book" class="add_book">+ Add Book</button>
+      <section data-id="books" class="books"></section>
+    </main>
+  </body>
+</html>

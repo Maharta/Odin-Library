@@ -1,0 +1,106 @@
+:root {
+  --radius-medium: 12px;
+}
+
+.header .container {
+  display: flex;
+  max-width: 1200px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  height: 100px;
+  margin-inline: auto;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+main {
+  background-color: #f0eef1;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2) inset;
+  min-height: calc(100% - 100px);
+  padding: 1rem;
+}
+
+main button.add_book {
+  display: block;
+  margin-bottom: 1rem;
+  margin-inline: auto;
+}
+
+section.books {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 250px);
+  gap: 1rem;
+}
+
+.book {
+  background-color: white;
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 12px;
+}
+
+.modal_overlay {
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  background-color: white;
+  border-radius: var(--radius-medium);
+  z-index: 9999;
+}
+
+.modal_overlay.invisible {
+  display: none;
+}
+
+.modal form .form-control label {
+  visibility: hidden;
+  position: absolute;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+/* book */
+
+.book button {
+  border-radius: 12px;
+}
+.book button:first-of-type {
+  background: none;
+  cursor: pointer;
+}
+
+.book button.read:hover,
+.book button.read:focus {
+  background-color: #98f295;
+}
+
+.book button.read {
+  background-color: #9fff9c;
+}
+
+.book button.unread {
+  background-color: rgb(169, 50, 50);
+  color: white;
+}
