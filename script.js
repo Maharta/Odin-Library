@@ -1,21 +1,23 @@
 "use strict";
-const myLibrary = [];
+let myLibrary = [];
 
-function Book({ title, author, pages, isRead }) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isRead = Boolean(isRead);
+class Book {
+  constructor({ title, author, pages, isRead }) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isRead = Boolean(isRead);
+  }
+
+  info() {
+    const readStatus = this.isRead ? "Already read" : "Not read yet";
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus}`;
+  }
+
+  toggleRead() {
+    this.isRead = !this.isRead;
+  }
 }
-
-Book.prototype.info = function () {
-  const readStatus = this.isRead ? "Already read" : "Not read yet";
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus}`;
-};
-
-Book.prototype.toggleRead = function () {
-  this.isRead = !this.isRead;
-};
 
 const addBookButton = document.querySelector('button[data-id="add_book"');
 const booksSection = document.querySelector('section[data-id="books"]');
@@ -63,6 +65,22 @@ function addBookToLibrary({ title, author, pages, isRead }) {
 }
 
 function renderNewBook({ book, index }) {
+  console.log(myLibrary);
+  const div = makeBookCard(book, index);
+  booksSection.appendChild(div);
+}
+
+function renderBooks() {
+  booksSection.innerHTML = "";
+  console.log(myLibrary);
+
+  myLibrary.forEach((book, index) => {
+    const div = makeBookCard(book, index);
+    booksSection.appendChild(div);
+  });
+}
+
+function makeBookCard(book, index) {
   const div = document.createElement("div");
   div.classList.add("book", "card");
   div.setAttribute("data-id", index);
@@ -94,33 +112,12 @@ function renderNewBook({ book, index }) {
   removeButton.innerText = "remove";
   removeButton.addEventListener("click", (e) => {
     const bookElement = e.target.parentElement;
-    myLibrary.filter(
-      (_, index) => index !== bookElement.getAttribute("data-id")
+    myLibrary = myLibrary.filter(
+      (_, index) => index !== +bookElement.getAttribute("data-id")
     );
-    bookElement.remove();
+    renderBooks();
   });
 
   div.append(h2, authorNode, pagesNode, isReadButton, removeButton);
-  booksSection.appendChild(div);
-}
-
-function renderBooks() {
-  booksSection.innerHTML = "";
-  myLibrary.forEach((book) => {
-    const div = document.createElement("div");
-    div.classList.add("book", "card");
-    const h2 = document.createElement("h2");
-    h2.innerText = book.title;
-    const authorNode = document.createElement("p");
-    authorNode.innerText = book.author;
-    const pagesNode = document.createElement("p");
-    pagesNode.innerText = book.pages;
-    const isReadButton = document.createElement("button");
-    isReadButton.innerText = book.isRead;
-    const removeButton = document.createElement("button");
-    removeButton.innerText = "remove";
-
-    div.append(h2, authorNode, pagesNode, isReadButton, removeButton);
-    booksSection.appendChild(div);
-  });
+  return div;
 }
